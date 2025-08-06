@@ -1,0 +1,13 @@
+﻿services:
+  discord:
+    image: discord
+    build:
+      context: .
+      dockerfile: discord/Dockerfile
+
+  web:
+    image: web
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+
