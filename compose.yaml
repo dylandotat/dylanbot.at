@@ -1,13 +1,32 @@
-﻿services:
+services:
   discord:
     image: discord
+    restart: always
     build:
       context: .
       dockerfile: discord/Dockerfile
+    environment:
+      TOKEN: token # Put the discord bot token you want to use here
+    ports:
+      - 8080:8080
 
   web:
     image: web
+    restart: always
     build:
       context: .
       dockerfile: web/Dockerfile
-
+    environment:
+      PORT: 8080 # Put the http port you want the webserver to use. You should probably use something like caddy or lighttpd to act as a reverse proxy.
+    ports:
+      - 8080:8080
+  
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: db
+      MYSQL_ROOT_PASSWORD: password123 # This is a highly insecure password, if you are hosting this yourself, please, please, please DO NOT use this password in production.
+      
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: password123 # Again please do not use this password in production.
