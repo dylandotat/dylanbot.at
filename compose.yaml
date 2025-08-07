@@ -10,16 +10,11 @@ services:
     ports:
       - 8080:8080
 
-  web:
-    image: web
-    restart: always
+  api:
+    image: api
     build:
       context: .
-      dockerfile: web/Dockerfile
-    environment:
-      PORT: 8080 # Put the http port you want the webserver to use. You should probably use something like caddy or lighttpd to act as a reverse proxy.
-    ports:
-      - 8080:8080
+      dockerfile: API/Dockerfile
   
   db:
     image: mysql
